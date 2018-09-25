@@ -1,0 +1,15 @@
+{
+  "name": "@anka-dev/brush",
+  "version": "1.0.1",
+  "description": "小程序canvas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "canvas"
+  ],
+  "author": "HuShengPing（slark） 272236490@qq.com",
+  "license": "ISC",
+  "private": false
+}
