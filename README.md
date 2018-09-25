@@ -114,4 +114,4 @@ const Brush = require('anka/wx-brush')
 const brush = new Brush(canvasId, ratio) //ratio需要自己根据wx.getSystemInfo算出来，ratio = 手机宽度/750
 brush.rect(10, 10, 150, 75).setFillStyle('red').fill().draw()
 ```
-[查看更多API]()
+[查看更多API](https://github.com/iException/anka-brush/blob/master/index.js)
