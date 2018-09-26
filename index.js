@@ -143,7 +143,7 @@ module.exports = class Brush {
     }
 
     drawRoundRectImage(round,image) {
-        this.save().drawRoundRect(...round).clip().drawImage(...image).restore()
+        return this.save().drawRoundRect(...round).clip().drawImage(...image).restore()
     }
 
     drawRoundRect (sX, sY, width, height, round = 0) {
