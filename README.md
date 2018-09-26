@@ -14,12 +14,16 @@
 
 
 # 在小程序中使用
-
+## 方式1：通过引入npm包使用
 0. 如果是第一次在小程序中使用npm包，那么先需要npm init，然后再按小程序官网的流程操作一遍，[点我](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)去查看小程序中npm教程
 
 0. 小程序中npm构建之后在对应需要使用小程序canvas功能的js页面中在page({})前引入，const Brush = require('anka/wx-brush')即可。
 
 0. 然后在需要用到canvas中的某些功能时直接使用const brush = new Brush(canvasId, ratio)构造函数中传入的是canvas的id和屏幕分辨率比值（手机宽度/750)。
+
+## 方式1：直接引入js文件
+0. 将index.js文件下载到本地，导入自己的项目中，在需要使用的页面直接引入即可。
+
 
 # 主要AIP
 
