@@ -4,11 +4,26 @@
  */
 
 module.exports = class Brush {
-    constructor (id, ratio = 1) {
-        this.ctx = wx.createCanvasContext(id)
-        this.ratio = ratio
+
+    /*
+ * 这个是用来操作小程序 canvas 的一个函数库
+ * 暂时没找见合适的，自己先凑合写个
+ */
+
+    constructor (id,_this) {
+        this.ctx = _this ? wx.createCanvasContext(id, _this) : wx.createCanvasContext(id)
+        try {
+            this.ratio = wx.getSystemInfoSync().windowWidth / 750
+        } catch (err) {
+            console.log(err)
+            wx.showToast({
+                title: '获取系统信息出错！',
+                icon: 'success',
+            })
+            this.ratio = 1
+        }
     }
-    //绘制方形
+
     rect (...val) {
         // console.log(val, this.ratio, ...val.map(v => v * this.ratio))
         this.ctx.rect(...this.formatParmas(val))
