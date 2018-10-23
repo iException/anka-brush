@@ -14,16 +14,12 @@
 
 
 # 在小程序中使用
-## 方式1：通过引入npm包使用
+
 0. 如果是第一次在小程序中使用npm包，那么先需要npm init，然后再按小程序官网的流程操作一遍，[点我](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)去查看小程序中npm教程
 
-0. 小程序中npm构建之后在对应需要使用小程序canvas功能的js页面中在page({})前引入，const Brush = require('anka/wx-brush')即可。
+0. 小程序中npm构建之后在对应需要使用小程序canvas功能的js页面中在page({})前引入，const Brush = require('@anka-dev/brush')即可。
 
-0. 然后在需要用到canvas中的某些功能时直接使用const brush = new Brush(canvasId, ratio)构造函数中传入的是canvas的id和屏幕分辨率比值（手机宽度/750)。
-
-## 方式1：直接引入js文件
-0. 将index.js文件下载到本地，导入自己的项目中，在需要使用的页面直接引入即可。
-
+0. 然后在需要用到canvas中的某些功能时直接使用const brush = new Brush(canvasId)构造函数中传入的是canvas的id，如果在组件中使用需要将this传入const brush = new Brush(canvasId, this)。
 
 # 主要AIP
 
@@ -36,8 +32,8 @@
 
 * 示例代码
 ```
-const Brush = require('anka/wx-brush') 
-const brush = new Brush(canvasId, ratio) //ratio需要自己根据getSysInfo算出来，手机宽度/750
+const Brush = require('@anka-dev/brush')
+const brush = new Brush(canvasId) 
 brush.drawImage(imgUrl, 0, 0, img.width, img.height, 0, 0, 750, 1221).draw()
 ```
 
@@ -51,8 +47,8 @@ brush.drawImage(imgUrl, 0, 0, img.width, img.height, 0, 0, 750, 1221).draw()
 
 * 示例代码
 ```
-const Brush = require('anka/wx-brush') 
-const brush = new Brush(canvasId, ratio) //ratio需要自己根据getSysInfo算出来，手机宽度/750
+const Brush = require('@anka-dev/brush') 
+const brush = new Brush(canvasId)
 brush.drawRoundImage(
    [圆心x轴的坐标, 圆心y坐标, 半径长度, 开始角度, 结束角度, 弧度的方向是否是逆时针],
    [图片url, 图像的左上角在目标canvas上x轴的位置, 图像的左上角在目标canvas上y轴的位置, 绘制图像的宽度, 绘制图像的高度, 图片在canvas上显示的x坐标, 图片在canvas上显示的y坐标, 图片在canvas上显示的宽, 图片在canvas上显示的高]).draw()
@@ -70,8 +66,8 @@ brush.drawRoundImage(
 
 * 示例代码
 ```
-const Brush = require('anka/wx-brush') 
-const brush = new Brush(canvasId, ratio) //ratio需要自己根据getSysInfo算出来，手机宽度/750
+const Brush = require('@anka-dev/brush')
+const brush = new Brush(canvasId)
 brush.drawRoundRect(220, 220, 236, 250).draw()
 ```
 
@@ -85,8 +81,8 @@ brush.drawRoundRect(220, 220, 236, 250).draw()
 
 * 示例代码
 ```
-const Brush = require('anka/wx-brush') 
-const brush = new Brush(canvasId, ratio) //ratio需要自己根据getSysInfo算出来，手机宽度/750
+const Brush = require('@anka-dev/brush') 
+const brush = new Brush(canvasId)
 brush.drawRoundRectImage(
                 [265, 430, 220, 220, 24],
                 [res.path, xStart, Ystart, res.width, res.height, 265, 430, 220, 220]
@@ -114,8 +110,8 @@ brush.drawRoundRectImage(
 
 * 示例代码
 ```
-const Brush = require('anka/wx-brush') 
-const brush = new Brush(canvasId, ratio) //ratio需要自己根据wx.getSystemInfo算出来，ratio = 手机宽度/750
+const Brush = require('@anka-dev/brush')
+const brush = new Brush(canvasId) 
 brush.rect(10, 10, 150, 75).setFillStyle('red').fill().draw()
 ```
-[查看更多例子](https://github.com/iException/brush-demo)
+[查看更多API](https://github.com/iException/anka-brush/blob/master/index.js)
