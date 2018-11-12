@@ -21,7 +21,7 @@
 
 0. 然后在需要用到canvas中的某些功能时直接使用const brush = new Brush(canvasId)构造函数中传入的是canvas的id，如果在组件中使用需要将this传入const brush = new Brush(canvasId, this)。
 
-# 主要AIP
+# 主要API
 
 * 绘制图像到画布。
 * `brush.drawImage(string imageResource, number dx, number dy, number dWidth, number dHeight, number sx, number sy, number sWidth, number sHeight)`
