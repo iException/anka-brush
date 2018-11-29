@@ -10,7 +10,7 @@
 
 # 介绍
 
-一款为简化小程序里canvas画图操作而创建的工具库。[Github 地址](https://github.com/iException/anka-brush)
+一款为简化小程序里canvas画图操作而创建的工具库。[Github 地址](https://github.com/iException/anka-brush) 和 [Demo](https://github.com/iException/brush-demo)
 
 # 功能
 
