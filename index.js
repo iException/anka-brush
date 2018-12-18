@@ -4,12 +4,6 @@
  */
 
 module.exports = class Brush {
-
-    /*
- * 这个是用来操作小程序 canvas 的一个函数库
- * 暂时没找见合适的，自己先凑合写个
- */
-
     constructor (id,_this) {
         this.ctx = _this ? wx.createCanvasContext(id, _this) : wx.createCanvasContext(id)
         try {
@@ -179,6 +173,10 @@ module.exports = class Brush {
     setShadow (...val) {
         this.ctx.setShadow(...this.formatParmas(val))
         return this
+    }
+    
+    measureText (val) {
+        return this.ctx.measureText(val) / this.ratio
     }
 
     /**
