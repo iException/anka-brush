@@ -176,7 +176,9 @@ module.exports = class Brush {
     }
     
     measureText (val) {
-        return this.ctx.measureText(val) / this.ratio
+        const res = this.ctx.measureText(val)
+        res.width = res.width / this.ratio
+        return res
     }
 
     /**
