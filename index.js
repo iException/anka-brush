@@ -1,31 +1,32 @@
-/*
- * 这个是用来操作小程序 canvas 的一个函数库
- * 暂时没找见合适的，自己先凑合写个
- */
-
-module.exports = class Brush {
-    constructor (id,_this) {
+export default class Brush {
+    constructor (id, ratio, _this) {
         this.ctx = _this ? wx.createCanvasContext(id, _this) : wx.createCanvasContext(id)
-        try {
-            this.ratio = wx.getSystemInfoSync().windowWidth / 750
-        } catch (err) {
-            console.log(err)
-            wx.showToast({
-                title: '获取系统信息出错！',
-                icon: 'success',
-            })
-            this.ratio = 1
+        if (ratio) {
+            this.ratio = ratio
+        } else {
+            try {
+                this.ratio = wx.getSystemInfoSync().windowWidth / 750
+            } catch (err) {
+                console.log(err)
+                wx.showToast({
+                    title: '获取系统信息出错！',
+                    icon: 'success',
+                })
+                this.ratio = 1
+            }
         }
     }
 
     rect (...val) {
-        // console.log(val, this.ratio, ...val.map(v => v * this.ratio))
         this.ctx.rect(...this.formatParmas(val))
         return this
     }
 
     setFillStyle (color = '') {
-        this.ctx.setFillStyle(color.replace(/tranparent/i, 'rgba(0,0,0,0,0)'))
+        if (typeof color === 'string') {
+            color = color.replace(/tranparent/i, 'rgba(0,0,0,0,0)')
+        }
+        this.ctx.setFillStyle(color)
         return this
     }
 
@@ -136,7 +137,24 @@ module.exports = class Brush {
     }
 
     fillRect (...val) {
+        val = val.map((v, index) => {
+            if (!isNaN(v) && index >= 0) {
+                return this.ratio * v
+            } else {
+                return v
+            }
+        })
         this.ctx.fillRect(...val)
+        return this
+    }
+
+    setLineWidth (...val) {
+        this.ctx.setLineWidth(...val)
+        return this
+    }
+
+    strokeStyle (...val) {
+        this.ctx.setStrokeStyle(...val)
         return this
     }
 
@@ -151,8 +169,17 @@ module.exports = class Brush {
         return this.save().beginPath().arc(...round).clip().drawImage(...image).restore()
     }
 
+    simpleDrawRoundImage (x, y, w, h, imgObj) {
+        return this.drawRoundImage([x + w / 2, y + h /2,  w / 2, 0, 2 * Math.PI],
+            [imgObj.path, 0, 0, imgObj.width, imgObj.height, x, y, w, h])
+    }
+
     drawRoundRectImage(round,image) {
         return this.save().drawRoundRect(...round).clip().drawImage(...image).restore()
+    }
+
+    simpleDrawRoundRectImage(x, y, w, h, radius, imgObj) {
+        return this.drawRoundRectImage([x, y, w, h, radius], [imgObj.path, 0, 0, imgObj.width, imgObj.height, x, y, w, h])
     }
 
     drawRoundRect (sX, sY, width, height, round = 0) {
@@ -174,12 +201,6 @@ module.exports = class Brush {
         this.ctx.setShadow(...this.formatParmas(val))
         return this
     }
-    
-    measureText (val) {
-        const res = this.ctx.measureText(val)
-        res.width = res.width / this.ratio
-        return res
-    }
 
     /**
      * 根据比例调整数字参数
@@ -197,5 +218,22 @@ module.exports = class Brush {
 
     getActions () {
         return this.ctx.getActions()
+    }
+
+    measureText (val) {
+        const res = this.ctx.measureText(val)
+        res.width = res.width / this.ratio
+        return res
+    }
+
+    createLinearGradient (...val) {
+        val = val.map((v, index) => {
+            if (!isNaN(v) && index >= 0) {
+                return this.ratio * v
+            } else {
+                return v
+            }
+        })
+        return this.ctx.createLinearGradient(...val)
     }
 }

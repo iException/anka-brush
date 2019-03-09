@@ -159,3 +159,7 @@ $ npm install @anka-dev/brush --save
         brush.rect(10, 10, 150, 75).setFillStyle('red').fill().draw()
         ```
 - [查看更多API](https://github.com/iException/anka-brush/blob/master/index.js)
+
+# LICENSE
+
+[MIT](./LICENSE)
