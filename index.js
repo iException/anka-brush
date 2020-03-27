@@ -10,7 +10,7 @@ export default class Brush {
                 console.log(err)
                 wx.showToast({
                     title: '获取系统信息出错！',
-                    icon: 'success',
+                    icon: 'none',
                 })
                 this.ratio = 1
             }
